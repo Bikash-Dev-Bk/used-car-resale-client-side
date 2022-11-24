@@ -58,7 +58,7 @@ const Navbar = () => {
               {/* <Link className="btn btn-ghost normal-case text-xl">
                 <img src={logo} alt="" />
               </Link> */}
-              <Link className="btn btn-ghost normal-case text-xl"><span className='
+              <Link className="btn btn-ghost normal-case text-xl font-bold"><span className='
               text-orange-600'>GEAR</span>UP</Link>
             </div>
           </div>
