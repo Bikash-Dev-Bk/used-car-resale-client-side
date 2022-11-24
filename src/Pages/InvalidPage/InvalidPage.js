@@ -1,9 +1,10 @@
 import React from 'react';
+import photo from '../../assets/images/404.jpg';
 
 const InvalidPage = () => {
     return (
-        <div>
-            <h2>This is Invalid Page</h2>
+        <div className='flex justify-center items-center h-screen mx-5'>
+            <img className='rounded-2xl ' src={photo} alt="page not found" />
         </div>
     );
 };
