@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './ServiceCard.css';
 
 const ServiceCard = ({service}) => {
 
@@ -11,7 +12,7 @@ const ServiceCard = ({service}) => {
     }, [description]);
 
     return (
-        <div className="card card-compact w-full bg-base-100 shadow-xl">
+        <div className="card card-compact w-full bg-base-100 shadow-xl service-card">
             <figure className="px-10 pt-10">
                 <img src={img} alt="Shoes" className="rounded-xl w-1/3" />
             </figure>
