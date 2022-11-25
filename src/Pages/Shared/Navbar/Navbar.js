@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import logo from "../../../assets/images/logo.png";
+import { AuthContext } from '../../../contexts/AuthProvider';
+import './Navbar.css';
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.error(error));
+  };
 
     const menuItems = <>
         <li className="font-semibold"><Link to='/'>Home</Link></li>
         <li className="font-semibold"><Link to='/blogs'>Blogs</Link></li>
-        <li className="font-semibold"><Link to='/login'>Log in</Link></li>
-        <li className="font-semibold"><Link to='/register'>Register</Link></li>
 
-        {/* {
+        {
           user?.email ?
           <>
-          <li className="font-semibold"><Link to='/myreviews'>My Reviews</Link></li>
-          <li className="font-semibold"><Link to='/addservice'>Add Service</Link></li>
+          {/* <li className="font-semibold"><Link to='/myreviews'>My Reviews</Link></li>
+          <li className="font-semibold"><Link to='/addservice'>Add Service</Link></li> */}
           <li className="font-semibold" onClick={handleLogOut} ><Link to='/login'>Log Out</Link></li>
           
           </>
@@ -22,7 +30,7 @@ const Navbar = () => {
           <li className="font-semibold"><Link to='/login'>Login</Link></li>
           <li className="font-semibold"><Link to='/register'>Register</Link></li>
           </>
-        } */}
+        }
     </>
 
 
@@ -55,9 +63,9 @@ const Navbar = () => {
             </div>
     
             <div className="header-image flex justify-items-center py-4 ">
-              {/* <Link className="btn btn-ghost normal-case text-xl">
+              <Link className="btn btn-ghost normal-case text-xl">
                 <img src={logo} alt="" />
-              </Link> */}
+              </Link>
               <Link className="btn btn-ghost normal-case text-3xl font-bold"><span className='
               text-orange-600'>GEAR</span>UP</Link>
             </div>
