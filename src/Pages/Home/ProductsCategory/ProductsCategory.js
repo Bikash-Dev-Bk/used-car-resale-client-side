@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import ProductCard from './ProductCard';
+import ProductCategoryCard from './ProductCategoryCard';
 
 const ProductsCategory = () => {
     const [products, setProducts] = useState([]);
   
     useEffect(() => {
-      fetch("http://localhost:5000/products")
+      fetch("http://localhost:5000/categories")
         .then((res) => res.json())
         .then((data) => setProducts(data));
     }, []);
@@ -15,7 +15,7 @@ const ProductsCategory = () => {
             <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-6">
                 {
                     products.map((product) => 
-                        <ProductCard key={product._id} product={product}></ProductCard>
+                        <ProductCategoryCard key={product._id} product={product}></ProductCategoryCard>
                     )
                 }
             </div>
