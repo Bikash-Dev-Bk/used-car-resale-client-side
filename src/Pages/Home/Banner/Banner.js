@@ -16,7 +16,7 @@ const Banner = () => {
             <p className="text-2xl text-white banner-text mt-6">Find your next car with us!</p>
           </div>
           <div className="absolute flex justify-start transform -translate-y-1/2 w-2/5 lg:left-24 left-8 mt-5 top-1/2">
-            <button className="btn btn-outline btn-warning">Book Now</button>
+            <button className="btn btn-outline btn-warning">Get Started</button>
           </div>
         </div>
     );
