@@ -5,9 +5,10 @@
 
 .question-answer{
     color: black;
-    background-color:  #f8bc6c;
+    background-color:  #cac8c7;
     padding: 30px;
-    margin: 30px;
+    margin-top: 30px;
+    margin-bottom: 10px;
     border-radius: 15px;
 }
 
