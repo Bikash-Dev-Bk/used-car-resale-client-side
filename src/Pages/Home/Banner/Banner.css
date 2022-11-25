@@ -1,0 +1,39 @@
+/* --------------------------------------
+                   fonts
+---------------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.banner-title {
+  font-family: "Great Vibes", cursive;
+  font-family: 'Roboto', sans-serif;
+}
+
+.banner-text {
+  font-family: "Berkshire Swash", cursive;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+
+/* ---------------------------------
+            Media Queries
+------------------------------------*/
+
+/*------Mobile devices--------*/
+
+@media only screen and (max-width: 688px) {
+  .banner-title {
+    font-size: 20px;
+  }
+
+  .banner-text {
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  .banner-image{
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
