@@ -2,20 +2,21 @@ import React, { useEffect, useState } from 'react';
 import ProductCategoryCard from './ProductCategoryCard';
 
 const ProductsCategory = () => {
-    const [products, setProducts] = useState([]);
+    const [productsCategory, setProductsCategory] = useState([]);
   
     useEffect(() => {
       fetch("http://localhost:5000/categories")
         .then((res) => res.json())
-        .then((data) => setProducts(data));
+        .then((data) => setProductsCategory(data));
     }, []);
+    
     return (
         <div className='my-10'>
             <h2 className='font-bold text-5xl text-center text-orange-600'>Choose your Brand</h2>
             <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-6">
                 {
-                    products.map((product) => 
-                        <ProductCategoryCard key={product._id} product={product}></ProductCategoryCard>
+                    productsCategory.map((productCategory) => 
+                        <ProductCategoryCard key={productCategory._id} productCategory={productCategory}></ProductCategoryCard>
                     )
                 }
             </div>
