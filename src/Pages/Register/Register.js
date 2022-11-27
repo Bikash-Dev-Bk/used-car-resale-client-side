@@ -5,7 +5,10 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 const Register = () => {
 
-    const [isSpinnerShow, setIsSpinnerShow] = useState(false);
+  const [userType,setUserType] = useState('buyer');
+
+  const [isSpinnerShow, setIsSpinnerShow] = useState(false);
+
     const { createUser, googleSignIn } = useContext(AuthContext);
 
     const location = useLocation();
@@ -17,16 +20,30 @@ const Register = () => {
         event.preventDefault();
         setIsSpinnerShow(true);
         const form = event.target;
+        console.log('inside registration',form)
         const email = form.email.value;
         const password = form.password.value;
+        const name = form.name.value;
 
-        console.log(email, password);
+        const user = { email, name, userType };
+        console.log(email, password, name, userType);
 
         createUser(email, password)
         .then((result) => {
-            const user = result.user;
+
+            fetch("http://localhost:5000/users", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(user),
+            })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((err) => console.error(err))
             navigate(from, { replace: true });
-            console.log(user);
         })
         .catch((err) => console.error(err));
     };
@@ -57,6 +74,7 @@ const Register = () => {
                     type="text"
                     name="name"
                     placeholder="Your Name"
+
                     className="input input-bordered"
                     required
                   />
@@ -85,9 +103,21 @@ const Register = () => {
                     required
                   />
                 </div>
+
+
+                <div>
+                  <label for="pet-select">Choose Your Role:</label>
+                    <br /> 
+                  <select onChange={(e)=>setUserType(e.target.value)} name="choice">
+                    <option value="buyer" selected>Buyer</option>
+                    <option value="seller" >Seller </option>
+                  </select>
+                </div>
+
+
                 <div className="form-control mt-6">
                   <button className="btn btn-primary">
-                    {isSpinnerShow ? <BeatLoader color="#ffffff" /> : "Register"}
+                  {isSpinnerShow ? <BeatLoader color="#ffffff" /> : "Register"}
                   </button>
                 </div>
                 <p className="text-center">Or login with</p>
