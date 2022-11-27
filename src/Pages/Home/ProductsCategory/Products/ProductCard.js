@@ -14,10 +14,11 @@ const ProductCard = ({product}) => {
                 <p>Seller Name: {seller_name}</p>
                 <p>Posted Time: {time}</p>
                 <div className="card-actions justify-center">
-                <button className="btn btn-primary">Book now</button>
+                <label htmlFor="booking-modal" className="btn btn-primary">Book now</label>
                 </div>
             </div>
         </div>
+        
     );
 };
 
