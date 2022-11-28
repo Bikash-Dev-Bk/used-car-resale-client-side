@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-// import logo from "../../../assets/images/logo.png";
 import { AuthContext } from '../../../contexts/AuthProvider';
 import './Navbar.css';
 
@@ -12,11 +11,10 @@ const Navbar = () => {
       .then(() => {})
       .catch((error) => console.error(error));
   };
-
+  
     const menuItems = <>
         <li className="font-semibold"><Link to='/'>Home</Link></li>
         <li className="font-semibold"><Link to='/blogs'>Blogs</Link></li>
-
         {
           user?.email ?
           <>
@@ -31,7 +29,6 @@ const Navbar = () => {
           </>
         }
     </>
-
 
     return (
         <div className="navbar bg-base-100">
@@ -60,15 +57,10 @@ const Navbar = () => {
                 {menuItems}
               </ul>
             </div>
-    
             <div className="header-image flex justify-items-center py-4 ">
-              {/* <Link className="btn btn-ghost normal-case text-xl">
-                <img src={logo} alt="" />
-              </Link> */}
               <Link className="btn btn-ghost normal-case text-3xl font-bold"><span className='
               text-orange-600'>GEAR</span>UP</Link>
             </div>
-            
           </div>
           <div className="navbar-end hidden lg:flex">
             <ul className="menu menu-horizontal p-0">

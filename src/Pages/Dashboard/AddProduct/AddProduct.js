@@ -1,11 +1,211 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from "react";
+import "./AddProduct.css";
+import toast, { Toaster } from "react-hot-toast";
+import { AuthContext } from "../../../contexts/AuthProvider";
+import moment from "moment/moment";
 
 const AddProduct = () => {
-    return (
-        <div>
-            <h3 className="text-3xl mb-5">Add A Product</h3>
-        </div>
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [condition, setCondition] = useState("good");
+  const [categoryId, setCategoryId] = useState("");
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    // fetch("https://service-review-server-side-liard.vercel.app/services")
+    //   .then((res) => res.json())
+    //   .then((data) => setProducts(data));
+    fetch("http://localhost:5000/categories")
+      .then((res) => res.json())
+      .then((data) => {
+        setCategoryId(data[0]?._id);
+        setCategories(data);
+      });
+  }, []);
+
+  const handleAddServices = (event) => {
+    event.preventDefault();
+    const name = event.target.title.value;
+    const original_price = event.target.original_price.value;
+    const resale_price = event.target.resale_price.value;
+    const description = event.target.description.value;
+    const img = event.target.img.value;
+    const time = event.target.time.value;
+    const phone = event.target.phone.value;
+    const seller_name = event.target.seller_name.value;
+    const years_of_use = event.target.years_of_use.value;
+    const location = event.target.location.value;
+
+    const product = {
+      name,
+      resale_price,
+      original_price,
+      description,
+      img,
+      category_id: categoryId,
+      time,
+      phone,
+      years_of_use,
+      location,
+      condition,
+    };
+    console.log(
+      name,
+      resale_price,
+      original_price,
+      description,
+      img,
+      seller_name,
+      condition
     );
+    event.target.reset();
+
+    fetch("http://localhost:5000/category/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        const newProduct = [...products, product];
+
+        setProducts(newProduct);
+        toast.success("Successfully added Product");
+      })
+      .catch((err) => console.error(err));
+  };
+
+  return (
+    <div>
+      <h3 className="text-3xl font-bold mb-5">Add A Product</h3>
+      <div className="App">
+        <form onSubmit={handleAddServices} className="form">
+          <br />
+          <input
+            type="text"
+            name="name"
+            id="title"
+            placeholder="Product Name"
+            required
+          />
+          <br />
+          <input
+            type="text"
+            name="description"
+            id="description"
+            placeholder=" Description"
+            required
+          />
+          <br />
+          <input
+            type="text"
+            name="original_price"
+            id="original_price"
+            placeholder="Original Price"
+            required
+          />
+          <br />
+          <input
+            type="text"
+            name="resale_price"
+            id="resale_price"
+            placeholder="Resale Price"
+            required
+          />
+          <br />
+          <input
+            type="text"
+            name="location"
+            id="location"
+            placeholder="Location"
+            required
+          />
+          <br />
+          <input
+            type="text"
+            name="years_of_use"
+            id="years_of_use"
+            placeholder="Years of use"
+            required
+          />
+          <br />
+          <input
+            type="text"
+            name="seller_name"
+            id="seller_name"
+            disabled
+            value={user.displayName}
+            placeholder="Seller_name"
+            required
+          />
+          <br />
+          <input
+            type="text"
+            name="time"
+            id="time"
+            disabled
+            value={moment(new Date()).format("MMMM Do YYYY, h:mm:ss a")}
+            placeholder="Post Time"
+            required
+          />
+          <br />
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            placeholder="Phone Number"
+            required
+          />
+          <br />
+          <input
+            type="text"
+            name="img"
+            id="img"
+            placeholder=" imgUrl"
+            required
+          />
+          <br />
+          <div>
+            <label>Choose category:</label>
+            <br />
+            <select
+              className="select-field"
+              onChange={(e) => setCategoryId(e.target.value)}
+              name="category"
+            >
+              {categories.map((res, i) => {
+                return (
+                  <option key={i} value={res._id}>
+                    {res.category_name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div>
+            <label>Choose condition type:</label>
+            <br />
+            <select
+              className="select-field"
+              onChange={(e) => setCondition(e.target.value)}
+              name="choice"
+            >
+              <option value="excellent">Excellent</option>
+              <option value="fair">Fair </option>
+              <option value="good">Good </option>
+            </select>
+          </div>
+          <button className="btn my-2" type="submit">
+            Add Product
+          </button>
+          <Toaster />
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default AddProduct;
