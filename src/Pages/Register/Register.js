@@ -109,7 +109,7 @@ const Register = () => {
                 <div>
                   <label for="pet-select">Choose Your Role:</label>
                     <br /> 
-                  <select className="select-field" onChange={(e)=>setUserType(e.target.value)} name="choice">
+                  <select className="select-field-reg" onChange={(e)=>setUserType(e.target.value)} name="choice">
                     <option value="buyer" selected>Buyer</option>
                     <option value="seller" >Seller </option>
                   </select>

@@ -89,7 +89,7 @@ const AddProduct = () => {
             placeholder="Product Name"
             required
           />
-          <br />
+          <br /><br />
           <input
             type="text"
             name="description"
@@ -97,7 +97,7 @@ const AddProduct = () => {
             placeholder=" Description"
             required
           />
-          <br />
+          <br /><br />
           <input
             type="text"
             name="original_price"
@@ -105,7 +105,7 @@ const AddProduct = () => {
             placeholder="Original Price"
             required
           />
-          <br />
+          <br /><br />
           <input
             type="text"
             name="resale_price"
@@ -113,7 +113,7 @@ const AddProduct = () => {
             placeholder="Resale Price"
             required
           />
-          <br />
+          <br /><br />
           <input
             type="text"
             name="location"
@@ -121,7 +121,7 @@ const AddProduct = () => {
             placeholder="Location"
             required
           />
-          <br />
+          <br /><br />
           <input
             type="text"
             name="years_of_use"
@@ -129,7 +129,7 @@ const AddProduct = () => {
             placeholder="Years of use"
             required
           />
-          <br />
+          <br /><br />
           <input
             type="text"
             name="seller_name"
@@ -139,7 +139,7 @@ const AddProduct = () => {
             placeholder="Seller_name"
             required
           />
-          <br />
+          <br /><br />
           <input
             type="text"
             name="time"
@@ -149,7 +149,7 @@ const AddProduct = () => {
             placeholder="Post Time"
             required
           />
-          <br />
+          <br /><br />
           <input
             type="text"
             name="phone"
@@ -157,7 +157,7 @@ const AddProduct = () => {
             placeholder="Phone Number"
             required
           />
-          <br />
+          <br /><br />
           <input
             type="text"
             name="img"
@@ -196,7 +196,7 @@ const AddProduct = () => {
               <option value="good">Good </option>
             </select>
           </div>
-          <button className="btn my-2" type="submit">
+          <button className="btn btn-primary my-2" type="submit">
             Add Product
           </button>
           <Toaster />
