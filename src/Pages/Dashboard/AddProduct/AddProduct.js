@@ -9,7 +9,18 @@ const AddProduct = () => {
   const [categories, setCategories] = useState([]);
   const [condition, setCondition] = useState("good");
   const [categoryId, setCategoryId] = useState("");
+
   const { user } = useContext(AuthContext);
+
+  const [userinfo, setUserinfo] = useState({});
+  console.log('inside all products',userinfo);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/users/${user.email}`)
+    .then((res) => res.json())
+      .then((data) => setUserinfo(data));
+
+  },[user.email])
 
   useEffect(() => {
     fetch("http://localhost:5000/categories")
@@ -168,7 +179,7 @@ const AddProduct = () => {
             type="text"
             name="seller_name"
             disabled
-            value={user.displayName}
+            value={userinfo.name}
             placeholder="Seller Name"
             required
           />
@@ -177,7 +188,7 @@ const AddProduct = () => {
             type="text"
             name="seller_email"
             disabled
-            value={user.email}
+            value={userinfo.email}
             placeholder="Seller Email"
             required
           />

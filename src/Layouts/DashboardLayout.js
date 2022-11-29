@@ -9,7 +9,6 @@ const DashboardLayout = () => {
 
   const { user } = useContext(AuthContext);
 
-  console.log("inside dashboard layout",user)
   const [isAdmin] = useAdmin(user?.email)
   const [isSeller] = useSeller(user?.email)
 
@@ -35,7 +34,7 @@ const DashboardLayout = () => {
                 <Link to="/dashboard/allbuyers">All Buyers</Link>
                 </li>
                 <li>
-                <Link to="/dashboard/allsellers">Add Sellers</Link>
+                <Link to="/dashboard/allsellers">All Sellers</Link>
                 </li>
               </>
               :
