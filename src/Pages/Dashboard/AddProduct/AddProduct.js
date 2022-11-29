@@ -12,9 +12,6 @@ const AddProduct = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    // fetch("https://service-review-server-side-liard.vercel.app/services")
-    //   .then((res) => res.json())
-    //   .then((data) => setProducts(data));
     fetch("http://localhost:5000/categories")
       .then((res) => res.json())
       .then((data) => {
@@ -38,6 +35,7 @@ const AddProduct = () => {
 
     const product = {
       name,
+      seller_name,
       resale_price,
       original_price,
       description,

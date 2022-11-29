@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { BeatLoader } from 'react-spinners';
 import { AuthContext } from '../../contexts/AuthProvider';
+import './Register.css';
 
 const Register = () => {
 
@@ -108,7 +109,7 @@ const Register = () => {
                 <div>
                   <label for="pet-select">Choose Your Role:</label>
                     <br /> 
-                  <select onChange={(e)=>setUserType(e.target.value)} name="choice">
+                  <select className="select-field" onChange={(e)=>setUserType(e.target.value)} name="choice">
                     <option value="buyer" selected>Buyer</option>
                     <option value="seller" >Seller </option>
                   </select>
