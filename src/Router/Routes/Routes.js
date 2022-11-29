@@ -64,11 +64,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/allbuyers",
-        element: <AllBuyers></AllBuyers>
+        element: <AllBuyers></AllBuyers>,
+        loader: ({ params }) =>
+          fetch(
+            `http://localhost:5000/users`
+        )
       },
       {
         path: "/dashboard/allsellers",
-        element: <AllSellers></AllSellers>
+        element: <AllSellers></AllSellers>,
+        loader: ({ params }) =>
+          fetch(
+            `http://localhost:5000/users`
+        )
       },
     ]
   },
