@@ -13,7 +13,6 @@ const AddProduct = () => {
   const { user } = useContext(AuthContext);
 
   const [userinfo, setUserinfo] = useState({});
-  console.log('inside all products',userinfo);
 
   useEffect(() => {
     fetch(`http://localhost:5000/users/${user.email}`)
