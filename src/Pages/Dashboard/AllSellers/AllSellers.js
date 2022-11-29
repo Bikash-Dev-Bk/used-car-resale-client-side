@@ -1,8 +1,15 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 const AllSellers = () => {
-    const users = useLoaderData();
+    const {data: users = [], } = useQuery({
+        queryKey: ['users'],
+        queryFn: async() =>{
+            const res = await fetch('http://localhost:5000/users');
+            const data = await res.json();
+            return data;
+        }
+    });
     console.log("inside allSellers",users);
     return (
         <div>
@@ -11,7 +18,6 @@ const AllSellers = () => {
             <table className="table w-full">
               <thead>
                 <tr>
-                  <th></th>
                   <th>Name</th>
                   <th>Email</th>
                   <th>Delete</th>
@@ -19,13 +25,11 @@ const AllSellers = () => {
                 </tr>
               </thead>
     
-              {users.map((user, i) => (
+              {users.map((user) => (
                 <tbody key={user._id}>
                   {
                     user.userType === 'seller' &&
                     <tr>
-                      
-                      <th>{i + 1}</th>
                       <td>{user.name}</td>
                       <td>{user.email}</td>
                       <td>
