@@ -5,6 +5,7 @@ import Blogs from "../../Pages/Blogs/Blogs";
 import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
+import DashBoard from "../../Pages/Dashboard/DashBoard/DashBoard";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import Home from "../../Pages/Home/Home/Home";
@@ -14,6 +15,7 @@ import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 const router = createBrowserRouter([
   {
@@ -53,15 +55,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
+        element: <DashBoard></DashBoard>
+      },
+      {
+        path: "/dashboard/myorders",
         element: <MyOrders></MyOrders>
       },
       {
         path: "/dashboard/myproducts",
-        element: <MyProducts></MyProducts>
+        element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
       },
       {
         path: "/dashboard/addproduct",
-        element: <AddProduct></AddProduct>
+        element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
       },
       {
         path: "/dashboard/allbuyers",

@@ -3,7 +3,7 @@ import React from 'react';
 const MyOrders = () => {
     return (
         <div>
-            <h3 className="text-3xl mb-5">My Orders</h3>
+            <h3  className="text-3xl font-bold mb-5">My Orders</h3>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -32,6 +32,12 @@ const MyOrders = () => {
                         <td>Brice Swyre</td>
                         <td>Tax Accountant</td>
                         <td>Red</td>
+                    </tr>
+                    <tr className="hover">
+                        <th>2</th>
+                        <td>Hart Hagerty</td>
+                        <td>Desktop Support Technician</td>
+                        <td>Purple</td>
                     </tr>
                     </tbody>
                 </table>
