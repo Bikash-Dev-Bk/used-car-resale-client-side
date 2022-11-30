@@ -4,17 +4,20 @@ const AllSellers = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://used-products-resale-server-side-three.vercel.app/users")
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);
   const handleVerified = (user) => {
-    fetch(`http://localhost:5000/users/${user._id}`, {
-      method: "PUT",
-    })
+    fetch(
+      `https://used-products-resale-server-side-three.vercel.app/users/${user._id}`,
+      {
+        method: "PUT",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
-        fetch(`http://localhost:5000/users`)
+        fetch(`https://used-products-resale-server-side-three.vercel.app/users`)
           .then((res) => res.json())
           .then((data) => setUsers(data));
       });
@@ -26,9 +29,12 @@ const AllSellers = () => {
     );
 
     if (agree) {
-      fetch(`http://localhost:5000/users/${user._id}`, {
-        method: "DELETE",
-      })
+      fetch(
+        `https://used-products-resale-server-side-three.vercel.app/users/${user._id}`,
+        {
+          method: "DELETE",
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount > 0) {

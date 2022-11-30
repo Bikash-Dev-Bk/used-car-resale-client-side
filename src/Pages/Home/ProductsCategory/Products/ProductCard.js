@@ -16,7 +16,9 @@ const ProductCard = ({ product }) => {
   const [user, setUser] = useState({});
   const [isClicked, setIsClicked] = useState(false);
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${seller_email}`)
+    fetch(
+      `https://used-products-resale-server-side-three.vercel.app/users/${seller_email}`
+    )
       .then((res) => res.json())
       .then((data) => setUser(data));
   }, [seller_email]);

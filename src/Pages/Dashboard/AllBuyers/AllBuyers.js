@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 const AllBuyers = () => {
-
-const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://used-products-resale-server-side-three.vercel.app/users")
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);
@@ -16,9 +15,12 @@ const [users, setUsers] = useState([]);
     );
 
     if (agree) {
-      fetch(`http://localhost:5000/users/${user._id}`, {
-        method: "DELETE",
-      })
+      fetch(
+        `https://used-products-resale-server-side-three.vercel.app/users/${user._id}`,
+        {
+          method: "DELETE",
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount > 0) {
@@ -45,19 +47,20 @@ const [users, setUsers] = useState([]);
 
           {users.map((user) => (
             <tbody key={user._id}>
-              {
-                user.userType === 'buyer' &&
+              {user.userType === "buyer" && (
                 <tr>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>
-                    <button 
-                    onClick={() => handleDelete(user)}
-                    className="btn btn-xs btn-error"
-                    >Delete</button>
+                    <button
+                      onClick={() => handleDelete(user)}
+                      className="btn btn-xs btn-error"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
-              }
+              )}
             </tbody>
           ))}
         </table>

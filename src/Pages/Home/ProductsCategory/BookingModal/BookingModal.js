@@ -8,7 +8,9 @@ const BookingModal = ({ product }) => {
   const [userinfo, setUserinfo] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${user.email}`)
+    fetch(
+      `https://used-products-resale-server-side-three.vercel.app/users/${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => setUserinfo(data));
   }, [user.email]);

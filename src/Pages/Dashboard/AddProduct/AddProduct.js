@@ -18,13 +18,17 @@ const AddProduct = () => {
   const [userinfo, setUserinfo] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${user.email}`)
+    fetch(
+      `https://used-products-resale-server-side-three.vercel.app/users/${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => setUserinfo(data));
   }, [user.email]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/categories")
+    fetch(
+      "https://used-products-resale-server-side-three.vercel.app/categories"
+    )
       .then((res) => res.json())
       .then((data) => {
         setCategoryId(data[0]?._id);
@@ -72,13 +76,16 @@ const AddProduct = () => {
     );
     event.target.reset();
 
-    fetch("http://localhost:5000/category/products", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(product),
-    })
+    fetch(
+      "https://used-products-resale-server-side-three.vercel.app/category/products",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(product),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

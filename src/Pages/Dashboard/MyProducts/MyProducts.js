@@ -6,19 +6,26 @@ const MyProducts = () => {
   const [myProducts, setMyProducts] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/category/products/${user.email}`)
+    fetch(
+      `https://used-products-resale-server-side-three.vercel.app/category/products/${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => setMyProducts(data));
   }, [user.email]);
 
   const handleIsAdvertise = (product) => {
     console.log(product);
-    fetch(`http://localhost:5000/category/products/${product._id}`, {
-      method: "PUT",
-    })
+    fetch(
+      `https://used-products-resale-server-side-three.vercel.app/category/products/${product._id}`,
+      {
+        method: "PUT",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
-        fetch(`http://localhost:5000/category/products/${user.email}`)
+        fetch(
+          `https://used-products-resale-server-side-three.vercel.app/category/products/${user.email}`
+        )
           .then((res) => res.json())
           .then((data) => setMyProducts(data));
       });
@@ -31,9 +38,12 @@ const MyProducts = () => {
 
     if (agree) {
       // console.log('deleting user with id: ', user._id)
-      fetch(`http://localhost:5000/category/products/${product._id}`, {
-        method: "DELETE",
-      })
+      fetch(
+        `https://used-products-resale-server-side-three.vercel.app/category/products/${product._id}`,
+        {
+          method: "DELETE",
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           // console.log(data)

@@ -41,44 +41,71 @@ const router = createBrowserRouter([
       },
       {
         path: "/category/:id",
-        element: <PrivateRoute><Products></Products></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <Products></Products>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(
-            `http://localhost:5000/category/${params.id}`
-          )
+            `https://used-products-resale-server-side-three.vercel.app/category/${params.id}`
+          ),
       },
-      
-    ]
+    ],
   },
   {
     path: "/dashboard",
-    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard",
-        element: <DashBoard></DashBoard>
+        element: <DashBoard></DashBoard>,
       },
       {
         path: "/dashboard/myorders",
-        element: <BuyerRoute><MyOrders></MyOrders></BuyerRoute>
+        element: (
+          <BuyerRoute>
+            <MyOrders></MyOrders>
+          </BuyerRoute>
+        ),
       },
       {
         path: "/dashboard/myproducts",
-        element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
+        element: (
+          <SellerRoute>
+            <MyProducts></MyProducts>
+          </SellerRoute>
+        ),
       },
       {
         path: "/dashboard/addproduct",
-        element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
+        element: (
+          <SellerRoute>
+            <AddProduct></AddProduct>
+          </SellerRoute>
+        ),
       },
       {
         path: "/dashboard/allbuyers",
-        element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
+        element: (
+          <AdminRoute>
+            <AllBuyers></AllBuyers>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/allsellers",
-        element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
+        element: (
+          <AdminRoute>
+            <AllSellers></AllSellers>
+          </AdminRoute>
+        ),
       },
-    ]
+    ],
   },
   {
     path: "*",
