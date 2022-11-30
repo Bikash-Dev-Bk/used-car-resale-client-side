@@ -3,6 +3,7 @@ import "./AddProduct.css";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import moment from "moment/moment";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
   const [products, setProducts] = useState([]);
@@ -12,14 +13,15 @@ const AddProduct = () => {
 
   const { user } = useContext(AuthContext);
 
+  const navigate = useNavigate();
+
   const [userinfo, setUserinfo] = useState({});
 
   useEffect(() => {
     fetch(`http://localhost:5000/users/${user.email}`)
-    .then((res) => res.json())
+      .then((res) => res.json())
       .then((data) => setUserinfo(data));
-
-  },[user.email])
+  }, [user.email]);
 
   useEffect(() => {
     fetch("http://localhost:5000/categories")
@@ -83,7 +85,11 @@ const AddProduct = () => {
         const newProduct = [...products, product];
 
         setProducts(newProduct);
+
         toast.success("Successfully added Product");
+        setTimeout(() => {
+          navigate("/dashboard/myproducts");
+        }, 500);
       })
       .catch((err) => console.error(err));
   };
@@ -93,7 +99,7 @@ const AddProduct = () => {
       <h3 className="text-3xl font-bold mb-5">Add A Product</h3>
       <div className="App">
         <form onSubmit={handleAddServices} className="form">
-        <div>
+          <div>
             <label>Choose category:</label>
             <br />
             <select
@@ -111,55 +117,46 @@ const AddProduct = () => {
             </select>
           </div>
           <br />
-          <input
-            type="text"
-            name="name"
-            placeholder="Product Name"
-            required
-          />
-          <br /><br />
+          <input type="text" name="name" placeholder="Product Name" required />
+          <br />
+          <br />
           <input
             type="text"
             name="description"
             placeholder=" Description"
             required
           />
-          <br /><br />
+          <br />
+          <br />
           <input
             type="text"
             name="original_price"
             placeholder="Original Price"
             required
           />
-          <br /><br />
+          <br />
+          <br />
           <input
             type="text"
             name="resale_price"
             placeholder="Resale Price"
             required
           />
-          <br /><br />
-          <input
-            type="text"
-            name="location"
-            placeholder="Location"
-            required
-          />
-          <br /><br />
+          <br />
+          <br />
+          <input type="text" name="location" placeholder="Location" required />
+          <br />
+          <br />
           <input
             type="text"
             name="years_of_use"
             placeholder="Years of use"
             required
           />
-          <br /><br />
-          <input
-            type="text"
-            id="img"
-            placeholder=" img Url"
-            required
-          />
-          
+          <br />
+          <br />
+          <input type="text" id="img" placeholder=" img Url" required />
+
           <div>
             <label>Choose condition type:</label>
             <br />
@@ -182,7 +179,8 @@ const AddProduct = () => {
             placeholder="Seller Name"
             required
           />
-          <br /><br />
+          <br />
+          <br />
           <input
             type="text"
             name="seller_email"
@@ -191,7 +189,8 @@ const AddProduct = () => {
             placeholder="Seller Email"
             required
           />
-          <br /><br />
+          <br />
+          <br />
           <input
             type="text"
             name="time"
@@ -200,14 +199,10 @@ const AddProduct = () => {
             placeholder="Post Time"
             required
           />
-          <br /><br />
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone Number"
-            required
-          />
-          <br /> 
+          <br />
+          <br />
+          <input type="text" name="phone" placeholder="Phone Number" required />
+          <br />
           <button className="btn btn-primary my-5" type="submit">
             Add Product
           </button>
