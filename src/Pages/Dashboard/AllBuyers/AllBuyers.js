@@ -1,15 +1,34 @@
-import React from "react";
-import { useQuery } from '@tanstack/react-query';
+import React, { useEffect, useState } from "react";
 
 const AllBuyers = () => {
-const {data: users = [], } = useQuery({
-    queryKey: ['users'],
-    queryFn: async() =>{
-        const res = await fetch('http://localhost:5000/users');
-        const data = await res.json();
-        return data;
+
+const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/users")
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }, []);
+
+  const handleDelete = (user) => {
+    const agree = window.confirm(
+      `Are you sure you want to delete: ${user.name}`
+    );
+
+    if (agree) {
+      fetch(`http://localhost:5000/users/${user._id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            alert(`${user.userType} deleted successfully.`);
+            const remainingUsers = users.filter((usr) => usr._id !== user._id);
+            setUsers(remainingUsers);
+          }
+        });
     }
-});
+  };
 
   return (
     <div>
@@ -32,7 +51,10 @@ const {data: users = [], } = useQuery({
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>
-                    <button className="btn btn-xs btn-error">Delete</button>
+                    <button 
+                    onClick={() => handleDelete(user)}
+                    className="btn btn-xs btn-error"
+                    >Delete</button>
                   </td>
                 </tr>
               }
