@@ -14,6 +14,7 @@ import InvalidPage from "../../Pages/InvalidPage/InvalidPage";
 import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import BuyerRoute from "../BuyerRoute/BuyerRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
 
@@ -59,7 +60,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/myorders",
-        element: <MyOrders></MyOrders>
+        element: <BuyerRoute><MyOrders></MyOrders></BuyerRoute>
       },
       {
         path: "/dashboard/myproducts",
