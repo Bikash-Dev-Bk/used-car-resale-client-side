@@ -1,8 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../contexts/AuthProvider";
 
 const BookingModal = () => {
   const { user } = useContext(AuthContext);
+
+  const [userinfo, setUserinfo] = useState({});
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/users/${user.email}`)
+    .then((res) => res.json())
+      .then((data) => setUserinfo(data));
+
+  },[user.email])
 
   const handleBooking = (event) => {
     event.preventDefault();
@@ -39,13 +48,25 @@ const BookingModal = () => {
             </div>
             <div className="form-control">
               <label className="label">
+                <span className="label-text">Price</span>
+              </label>
+              <input
+                name="price"
+                type="text"
+                disabled
+                value=""
+                className="input w-full input-bordered"
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
                 <span className="label-text">Name</span>
               </label>
               <input
                 name="name"
                 type="text"
                 disabled
-                value={user.displayName}
+                value={userinfo.name}
                 placeholder="Your Name"
                 className="input w-full input-bordered"
               />
@@ -58,7 +79,7 @@ const BookingModal = () => {
                 name="email"
                 type="email"
                 disabled
-                value={user.email}
+                value={userinfo.email}
                 placeholder="Email Address"
                 className="input w-full input-bordered"
               />
@@ -87,18 +108,7 @@ const BookingModal = () => {
                 required
               />
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Price</span>
-              </label>
-              <input
-                name="price"
-                type="text"
-                disabled
-                value=""
-                className="input w-full input-bordered"
-              />
-            </div>
+            
             <div className="modal-action">
               <button>
                 <label htmlFor="booking-modal" className="btn btn-primary">
