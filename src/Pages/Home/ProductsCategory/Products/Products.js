@@ -16,7 +16,7 @@ const Products = () => {
             }
             
         </div>
-        <BookingModal></BookingModal>
+        
         </section>
     );
 };

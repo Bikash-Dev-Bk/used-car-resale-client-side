@@ -8,6 +8,17 @@ const AllSellers = () => {
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);
+  const handleVerified = (user) => {
+    fetch(`http://localhost:5000/users/${user._id}`, {
+      method: "PUT",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        fetch(`http://localhost:5000/users`)
+          .then((res) => res.json())
+          .then((data) => setUsers(data));
+      });
+  };
 
   const handleDelete = (user) => {
     const agree = window.confirm(
@@ -47,7 +58,9 @@ const AllSellers = () => {
             <tbody key={user._id}>
               {user.userType === "seller" && (
                 <tr>
-                  <td>{user.name}</td>
+                  <td>
+                    {user.name} {user?.isVerified ? "✅" : ""}
+                  </td>
                   <td>{user.email}</td>
                   <td>
                     <button
@@ -58,7 +71,13 @@ const AllSellers = () => {
                     </button>
                   </td>
                   <td>
-                    <button className="btn btn-xs btn-success">Verify</button>
+                    <button
+                      className="btn btn-xs btn-success"
+                      disabled={user?.isVerified}
+                      onClick={() => handleVerified(user)}
+                    >
+                      {user.isVerified ? "Verified" : "Verify"}
+                    </button>
                   </td>
                 </tr>
               )}

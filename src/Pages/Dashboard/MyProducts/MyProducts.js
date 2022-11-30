@@ -11,6 +11,19 @@ const MyProducts = () => {
       .then((data) => setMyProducts(data));
   }, [user.email]);
 
+  const handleIsAdvertise = (product) => {
+    console.log(product);
+    fetch(`http://localhost:5000/category/products/${product._id}`, {
+      method: "PUT",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        fetch(`http://localhost:5000/category/products/${user.email}`)
+          .then((res) => res.json())
+          .then((data) => setMyProducts(data));
+      });
+  };
+
   const handleDelete = (product) => {
     const agree = window.confirm(
       `Are you sure you want to delete: ${product.name}`
@@ -65,7 +78,11 @@ const MyProducts = () => {
                   </button>
                 </td>
                 <td>
-                  <button className="btn btn-sm btn-outline btn-warning">
+                  <button
+                    disabled={product?.isAdvertise}
+                    className="btn btn-sm btn-outline btn-warning"
+                    onClick={() => handleIsAdvertise(product)}
+                  >
                     Advertise
                   </button>
                 </td>
