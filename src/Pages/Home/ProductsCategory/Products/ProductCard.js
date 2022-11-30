@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import BookingModal from "../BookingModal/BookingModal";
 
 const ProductCard = ({ product }) => {
   const {
@@ -13,6 +14,7 @@ const ProductCard = ({ product }) => {
     seller_email,
   } = product;
   const [user, setUser] = useState({});
+  const [isClicked, setIsClicked] = useState(false);
   useEffect(() => {
     fetch(`http://localhost:5000/users/${seller_email}`)
       .then((res) => res.json())
@@ -34,12 +36,18 @@ const ProductCard = ({ product }) => {
           {user?.isVerified ? " ✅" : ""}
         </p>
         <p>Posted Time: {time}</p>
-        <div className="card-actions justify-center">
+        <div
+          className="card-actions justify-center"
+          onClick={() => {
+            setIsClicked(true);
+          }}
+        >
           <label htmlFor="booking-modal" className="btn btn-primary">
             Book now
           </label>
         </div>
       </div>
+      {isClicked && <BookingModal product={product}></BookingModal>}
     </div>
   );
 };

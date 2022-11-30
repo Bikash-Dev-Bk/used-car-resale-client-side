@@ -1,7 +1,6 @@
 import React from 'react';
 import ProductCard from './ProductCard';
 import { useLoaderData } from 'react-router-dom';
-import BookingModal from '../BookingModal/BookingModal';
 
 const Products = () => {
 
@@ -16,7 +15,6 @@ const Products = () => {
             }
             
         </div>
-        
         </section>
     );
 };

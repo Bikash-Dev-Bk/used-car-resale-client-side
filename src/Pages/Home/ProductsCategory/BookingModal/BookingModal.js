@@ -1,23 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../contexts/AuthProvider";
 
-const BookingModal = () => {
+const BookingModal = ({ product }) => {
+  console.log("product", product);
   const { user } = useContext(AuthContext);
 
   const [userinfo, setUserinfo] = useState({});
 
   useEffect(() => {
     fetch(`http://localhost:5000/users/${user.email}`)
-    .then((res) => res.json())
+      .then((res) => res.json())
       .then((data) => setUserinfo(data));
-
-  },[user.email])
+  }, [user.email]);
 
   const handleBooking = (event) => {
     event.preventDefault();
     const form = event.target;
-    const item = form.item.value;
-    const price = form.slot.value;
     const name = form.name.value;
     const email = form.email.value;
     const phone = form.phone.value;
@@ -32,7 +30,12 @@ const BookingModal = () => {
       <input type="checkbox" id="booking-modal" className="modal-toggle" />
       <div className="modal modal-bottom sm:modal-middle">
         <div className="modal-box relative">
-        <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+          <label
+            htmlFor="booking-modal"
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            ✕
+          </label>
           <form onSubmit={handleBooking} className="grid grid-cols-1 gap-0">
             <div className="form-control">
               <label className="label">
@@ -42,7 +45,7 @@ const BookingModal = () => {
                 name="item"
                 type="text"
                 disabled
-                value=""
+                value={product.name}
                 className="input w-full input-bordered"
               />
             </div>
@@ -54,7 +57,7 @@ const BookingModal = () => {
                 name="price"
                 type="text"
                 disabled
-                value=""
+                value={product.resale_price}
                 className="input w-full input-bordered"
               />
             </div>
@@ -108,7 +111,7 @@ const BookingModal = () => {
                 required
               />
             </div>
-            
+
             <div className="modal-action">
               <button>
                 <label htmlFor="booking-modal" className="btn btn-primary">
