@@ -21,23 +21,25 @@ const AdvertisedItems = () => {
           <h2 className="text-6xl font-bold text-center my-10 text-orange-600">
             Advertised Items
           </h2>
-
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-6">
           {advertisedItems.map((advertisedItem) => {
             return (
-              <div className="card card-side bg-base-100 shadow-xl mb-5">
-                <img width="300px" src={advertisedItem.img} alt="Movie" />
+              <div className="card card-compact w-96 bg-base-100 shadow-2xl">
+                <figure>
+                  <img src={advertisedItem.img} alt="Shoes" />
+                </figure>
                 <div className="card-body">
-                  <h2 className="card-title font-bold text-5xl">
-                    {advertisedItem.name}
-                  </h2>
-                  <p className="font-bold text-4xl">
-                    <span className="text-orange-600">Price:</span>{" "}
-                    {advertisedItem.resale_price}
-                  </p>
+                  <h2 className="card-title">{advertisedItem.name}</h2>
+                  <p>Location: {advertisedItem.location}</p>
+                  <p>Original Price: {advertisedItem.original_price}</p>
+                  <p>Resale Price: {advertisedItem.resale_price}</p>
+                  <p>Year of use: {advertisedItem.years_of_use}</p>
+                  <p>Posted Time: {advertisedItem.time}</p>
                 </div>
               </div>
             );
           })}
+          </div>
         </div>
       )}
     </>
